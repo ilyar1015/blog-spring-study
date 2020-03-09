@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head th:replace="_fragments :: head(~{::title})">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=divice-width, initial-scale=1.0">
+	<title>博客详情</title>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/typo.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/animate.css">
+	<link rel="stylesheet" type="text/css" href="../static/lib/prism/prism.css">
+	<link rel="stylesheet" type="text/css" href="../static/lib/tocbot/tocbot.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/me.css">
+</head>
+<body>
+
+	<!-- 导航 -->
+	<nav th:replace="_fragments :: menu(1)" class="ui inverted segment m-padded-td-mini m-shadow-small">
+		<div class="ui container">
+			<div class="ui inverted menu stackable secondary">
+				<h2 class="ui header teal item">Blog</h2>
+				<a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
+				<a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+				<a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+				<a href="#" class="m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>
+				<a href="#" class="active m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
+				<div class="right item m-mobile-hide">
+					<div class="ui icon inverted transparent input">
+						<input type="text" placeholder="Search....." >
+						<i class="search link icon"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+			<i class="sidebar icon "></i>
+		</a>
+	</nav>
+
+	<!-- 中间内容 -->
+	<div id="waypoint" class="m-container-small m-padded-td-large animated fadeIn">
+		<div class="ui container">
+			<div class="ui top attached segment">
+				<div class="ui horizontal link list">
+					<div class="item">
+						<img class="ui avatar image" src="https://unsplash.it/100/100?image=1005">
+						<div class="content">
+							<a herf="#" class="header">名字</a>
+						</div>
+					</div>
+					<div class="item">
+						<i class="calendar icon"></i>2020-1-1
+					</div>
+					<div class="item">
+						<i class="eye icon">2342</i>
+					</div>
+				</div>
+			</div>
+			<!-- 图片区域 -->
+			<div class="ui attached segment">
+				<img src="https://unsplash.it/800/450?image=1005" alt="" class="ui fluid image rounded">
+			</div>
+			<!-- 内容 -->
+			<div class="ui attached padded segment">
+				<div class="ui right aligned basic segment">
+					<div class="ui orange basic label">原创</div>
+				</div>
+				<h2 class="ui center aligned header">深入理解协程（二）：yield from实现异步协程</h2>
+				<div id="content" class="typo js-toc-content typo-selection m-padded-lr-responsive m-padded-td">
+					<h3>说明：</h3>
+					<p>解释1：g2是调用generator_2()得到的生成器对象，作为协程使用。</p>
+					<p>解释2：预激活协程g2。</p>
+					<p>解释3：generator_2接收的值都会经过yield from处理，通过管道传入generator_1实例。generator_2会在yield from处暂停，等待generator_1实例传回的值赋值给total。</p>
+					<p>解释4：调用方传入的值都会传到这里。</p>
+					<p>解释5：此处返回的total正是generator_2()中解释3处等待返回的值。</p>
+					<p>解释6：传入2进行计算。</p>
+					<p>解释7：在计算的结尾传入None，跳出generator_1()的循环，结束计算。</p>
+					<p>说到这里，相信看过《深入理解协程（一）：协程的引入》的朋友应该就容易理解上面这段代码的运行流程了。</p>
+					<p>借助上面例子，说明一下随yield from一起引入的3个概念：</p>
+				</div>
+				<!-- 标签 -->
+				<div class="m-padded-lr m-padded-td">
+					<div class="ui basic teal left pointing label">方法</div>
+				</div>
+				<!-- 赞赏 -->
+				<div class="ui center aligned basic segment">
+					<button id="payButton" class="ui orange basic circular button">赞赏</button>
+				</div>
+				<div class="ui payQR flowing popup transition hidden">
+					<div class="ui orange basic label">
+						<div class="ui images" style="font-size: inherit">
+							<div class="image">
+								<img src="../static/images/qr.png" alt="" class="ui rounded bordered image" style="width: 120px">
+								<div>支付宝</div>
+							</div>
+							<div class="image">
+								<img src="../static/images/qr.png" alt="" class="ui rounded bordered image" style="width: 120px">
+								<div>微信</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 博客信息 -->
+			<div class="ui attached positive message">
+				<div class="ui middle aligned grid">
+					<div class="eleven wide column">
+						<ui class="list">
+							<li>作者：XXX</li>
+							<li>发表时间：XXX</li>
+							<li>版权申明：XXX</li>
+							<li>公众号转载：XXX</li>
+						</ui>
+					</div>
+					<div class="five wide column">
+						<img src="../static/images/qr.png" alt="" class="ui right floated rounded bordered image" style="width: 110px">
+					</div>
+				</div>
+			</div>
+			<!-- 留言区域 -->
+			<div id="comment-container" class="ui bottom attached segment">
+				<!-- 留言区域列表-->
+				<div class="ui teal segment">
+					<div class="ui comments">
+						<h3 class="ui dividing header">Comments</h3>
+						<div class="comment">
+							<a class="avatar">
+								<img src="../static/images/matt.jpg">
+							</a>
+							<div class="content">
+								<a class="author">Matt</a>
+								<div class="metadata">
+									<span class="date">Today at 5:42PM</span>
+								</div>
+								<div class="text">
+									How artistic!
+								</div>
+								<div class="actions">
+									<a class="reply">回复</a>
+								</div>
+							</div>
+						</div>
+						<div class="comment">
+							<a class="avatar">
+								<img src="../static/images/elliot.jpg">
+							</a>
+							<div class="content">
+								<a class="author">Elliot Fu</a>
+								<div class="metadata">
+									<span class="date">Yesterday at 12:30AM</span>
+								</div>
+								<div class="text">
+									<p>This has been very useful for my research. Thanks as well!</p>
+								</div>
+								<div class="actions">
+									<a class="reply">回复</a>
+								</div>
+							</div>
+							<div class="comments">
+								<div class="comment">
+									<a class="avatar">
+										<img src="../static/images/jenny.jpg">
+									</a>
+									<div class="content">
+										<a class="author">Jenny Hess</a>
+										<div class="metadata">
+											<span class="date">Just now</span>
+										</div>
+										<div class="text">
+											Elliot you are always so right :)
+										</div>
+										<div class="actions">
+											<a class="reply">回复</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="comment">
+							<a class="avatar">
+								<img src="../static/images/joe.jpg">
+							</a>
+							<div class="content">
+								<a class="author">Joe Henderson</a>
+								<div class="metadata">
+									<span class="date">5 days ago</span>
+								</div>
+								<div class="text">
+									Dude, this is awesome. Thanks so much
+								</div>
+								<div class="actions">
+									<a class="reply">回复</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 列表区域 -->
+				<div class="ui form">
+					<div class="filed">
+						<textarea name="content" placeholder="请输入评论信息..."></textarea>
+					</div>
+					<div class="fields m-padded-td">
+						<div class="field m-mobile-wide m-margin-bottom-small">
+							<div class="ui left icon input">
+								<i class="user icon"></i>
+								<input type="text" name="nickname" placeholder="姓名">
+							</div>
+						</div>
+						<div class="field m-mobile-wide m-margin-bottom-small">
+							<div class="ui left icon input">
+								<i class="mail icon"></i>
+								<input type="text" name="email" placeholder="邮箱">
+							</div>
+						</div>
+						<div class="field m-mobile-wide m-margin-bottom-small">
+							<button class="ui teal button m-mobile-wide"><i class="edit icon"></i>发布</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="toolbar" class="m-padded m-fixed m-right-bottom" style="display: none">
+		<div class="ui vertical icon buttons">
+			<button type="button" class="ui toc teal button">目录</button>
+			<a href="#comment-container" type="button" class="ui teal button">留言</a>
+			<button class="ui wechat teal icon button"><i class="wechat icon"></i></button>
+			<a id="toTop-button" href="#" type="button" class="ui teal icon button"><i class="chevron up icon"></i></a>
+		</div>
+	</div>
+
+	<div class="ui toc-container flowing popup transition hidden" style="width: 250px !important;">
+		<ol class="js-toc"></ol>
+	</div>
+
+	<div id="qrcode" class="ui wechat-qr flowing popup transition hidden" style="width: 130px !important;">
+<!--		<img src="static/images/qr.png" alt="" class="ui rounded image" style="width: 120px">-->
+	</div>
+
+	<!-- 底部footer -->
+	<footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-td-massive">
+		<div class="ui center aligned container">
+			<div class="ui inverted divided stackable grid">
+				<div class="three wide column">
+					<div class="ui inverted link list">
+						<a href="#" class="item">
+							<img src="../static/images/qr.png" class="ui rounded image" alt="" style="width: 110px;">
+						</a>
+					</div>
+				</div >
+				<div class="three wide column">
+					<h4 class="ui inverted header m-text-thin m-text-spaced">最新博客</h4>
+					<div class="ui inverted link list">
+						<a href="#" class="item">用户故事（User Story）</a>
+						<a href="#" class="item">关于可以练习的清单</a>
+						<a href="#" class="item">失败要趁早</a>
+					</div>
+				</div >
+				<div class="three wide column">
+					<h4 class="ui inverted header m-text-thin m-text-spaced">联系我</h4>
+					<div class="ui inverted link list">
+						<a href="#" class="item">Email: XXX@XXX.com</a>
+						<a href="#" class="item">QQ: XXXXXX</a>
+					</div>
+				</div >
+				<div class="seven wide column">
+					<h4 class="ui inverted header m-text-thin m-text-spaced">Blog</h4>
+					<p class="m-text-thin m-text-spaced m-opacity-mini">这个我的个人博客，会分享关于编程、写作、思考相关的任何内容，希望可以给来到这儿的人有所帮助</p>
+				</div >
+			</div>
+			<div class="ui inverted section divider"></div>
+			<p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright 2016-2017 Linermi Disigned</p>
+		</div>
+	</footer>
+	<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+	<script src="../static/lib/prism/prism.js"></script>
+	<script src="../static/lib/tocbot/tocbot.min.js"></script>
+	<script src="../static/lib/qrcode/qrcode.min.js"></script>
+	<script src="../static/lib/waypoints/jquery.waypoints.min.js"></script>
+	<!--/*/</th:block>/*/-->
+	<script>
+		$('.menu.toggle').click(function () {
+			$(".m-item").toggleClass("m-mobile-hide");
+		});
+
+		$("#payButton").popup({
+			popup:$(".payQR.popup"),
+			on:"click",
+			position: "bottom center"
+		});
+
+		tocbot.init({
+			tocStartLevel: ".js-toc",
+			contentSelector: ".js-toc-content",
+			headingSelector: "h1,h2,h3"
+		});
+
+		$(".toc.button").popup({
+			popup:$(".toc-container.popup"),
+			on:"click",
+			position: "left center"
+		});
+
+		$(".wechat").popup({
+			popup: $(".wechat-qr"),
+			position: "left center"
+		});
+
+		var qrcode = new QRCode("qrcode", {
+			text: "http://www.baidu.com",
+			width: 110,
+			height: 110,
+			colorDark: "#000000",
+			colorLight: "#FFFFFF",
+			correctLevel: QRCode.CorrectLevel.H
+		});
+
+		$("#toTop-button").click(function () {
+			$(window).scrollTo(0, 500);
+		});
+
+		var waypoint = new Waypoint({
+			element: document.getElementById("waypoint"),
+			handler: function (direction) {
+				if(direction == "down"){
+					$("#toolbar").show(500);
+				}else{
+					$("#toolbar").hide(500);
+				}
+			}
+		});
+	</script>
+</body>
+</html>
