@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:fragment="head(title)">
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head th:replace="admin/_fragments :: head(~{::title})">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=divice-width, initial-scale=1.0">
 	<title>博客管理</title>
@@ -10,7 +10,7 @@
 <body>
 
 	<!-- 导航 -->
-	<nav class="ui inverted attached segment m-padded-td-mini m-shadow-small">
+	<nav th:replace="admin/_fragments :: menu(0)" class="ui inverted attached segment m-padded-td-mini m-shadow-small">
 		<div class="ui container">
 			<div class="ui inverted menu stackable secondary">
 				<h2 class="ui header teal item">Blog</h2>
@@ -36,86 +36,21 @@
 		</a>
 	</nav>
 
-	<div class="ui attached pointing menu">
-		<div class="ui container">
-			<div class="right menu">
-				<a href="#" class="item">发布</a>
-				<a href="#" class="teal active item">列表</a>
-			</div>
-		</div>
-	</div>
 
 	<!-- 中间内容 -->
 	<div class="m-container-small m-padded-td-large">
 		<div class="ui container">
-			<form action="#" class="ui segment form" method="post">
-				<div class="inline fields">
-					<div class="field">
-						<input type="text" name="title" placeholder="标题">
-					</div>
-					<div class="field">
-						<div class="ui selection dropdown">
-							<input type="hidden" name="type">
-							<i class="dropdown icon"></i>
-							<div class="default text">分类</div>
-							<div class="menu">
-								<div class="item" data-value="1">错误日志</div>
-								<div class="item" data-value="2">开发者手册</div>
-							</div>
-						</div>
-					</div>
-					<div class="field">
-						<div class="ui checkbox">
-							<input type="checkbox" id="recommend" name="recommend">
-							<label for="recommend">推荐</label>
-						</div>
-					</div>
-					<div class="field">
-						<button class="ui mini teal basic button"><i class="search icon"></i>搜索</button>
-					</div>
-				</div>
-			</form>
-			<table class="ui celled table">
-				<thead>
-					<tr>
-						<th></th>
-						<th>标题</th>
-						<th>类型</th>
-						<th>推荐</th>
-						<th>更新时间</th>
-						<th>操作</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>1</td>
-						<td>可以联系清单</td>
-						<td>认证升级</td>
-						<td>是</td>
-						<td>2019-1-30 09:45</td>
-						<td>
-							<a href="#" class="ui mini teal basic button">编辑</a>
-							<a href="#" class="ui mini red basic button">删除</a>
-						</td>
-					</tr>
-				</tbody>
-				<tfoot>
-					<tr>
-						<th colspan="6">
-							<div class="ui mini pagination menu">
-								<a class="item">上一页</a>
-								<a class="item">下一页</a>
-							</div>
-							<a href="#" class="ui mini right floated teal basic button">新增</a>
-						</th>
-					</tr>
-				</tfoot>
-			</table>
+			<div class="ui success large message">
+				<h3>Hi,</h3>
+				<p>xxx,欢迎登录</p>
+			</div>
+
+			<img src="https://unsplash.it/1000/400?image=1005" alt="" class="ui rounded bordered fluid image">
 		</div>
 	</div>
 
 	<!-- 底部footer -->
-	<footer class="ui inverted vertical segment m-padded-td-massive">
+	<footer th:replace="admin/_fragments :: footer" class="ui inverted vertical segment m-padded-td-massive">
 		<div class="ui center aligned container">
 			<div class="ui inverted divided stackable grid">
 				<div class="three wide column">
@@ -149,9 +84,10 @@
 			<p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright 2016-2017 Linermi Disigned</p>
 		</div>
 	</footer>
-
+	<!--/*/<th:block th:replace="admin/_fragments :: script">/*/-->
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+	<!--/*/</th:block>/*/-->
 	<script>
 		$('.menu.toggle').click(function () {
 			$(".m-item").toggleClass("m-mobile-hide");
