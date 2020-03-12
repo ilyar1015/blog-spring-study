@@ -28,6 +28,7 @@ public class TypeServiceImpl implements TypeService {
         return typeRepository.findById(id).orElse(null);
     }
 
+    @Transactional
     @Override
     public Type getTypeByName(String name) {
         return typeRepository.findByName(name);
