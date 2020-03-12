@@ -17,10 +17,10 @@
 <nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-td-mini m-shadow-small">
     <div class="ui container">
         <div class="ui inverted menu stackable secondary">
-            <h2 class="ui header teal item">Blog</h2>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="home icon"></i>博客</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="idea icon"></i>分类</a>
-            <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="tags icon"></i>标签</a>
+            <h2 class="ui header teal item">管理后台</h2>
+            <a th:href="@{/admin/blogs}" href="#" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="home icon"></i>博客</a>
+            <a th:href="@{/admin/types}" href="#" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="idea icon"></i>分类</a>
+            <a th:href="@{/admin/tags}" href="#" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="tags icon"></i>标签</a>
             <div class="right m-item m-mobile-hide menu">
                 <div class="ui dropdown item">
                     <div class="text">
