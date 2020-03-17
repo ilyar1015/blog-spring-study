@@ -211,10 +211,9 @@ public class Blog {
         this.tagIds = tagsToIds(this.getTags());
     }
 
-    //1,2,3
-    private String tagsToIds(List<Tag> tags) {
+        private String tagsToIds(List<Tag> tags) {
         if (!tags.isEmpty()) {
-            StringBuffer ids = new StringBuffer();
+            StringBuilder ids = new StringBuilder();
             boolean flag = false;
             for (Tag tag : tags) {
                 if (flag) {

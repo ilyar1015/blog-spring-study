@@ -54,9 +54,22 @@ public class BlogController {
 
     @GetMapping("/blogs/input")
     public String input(Model model) {
+        setTypeAndTag(model);
+        model.addAttribute("blog", new Blog());
+        return INPUT;
+    }
+
+    private void setTypeAndTag(Model model) {
         model.addAttribute("types", typeService.listType());
         model.addAttribute("tags", tagService.listTag());
-        model.addAttribute("blog", new Blog());
+    }
+
+    @GetMapping("/blogs/{id}/input")
+    public String editInput(@PathVariable Long id, Model model) {
+        setTypeAndTag(model);
+        Blog blog = blogService.getBlog(id);
+        blog.init();
+        model.addAttribute("blog", blog);
         return INPUT;
     }
 
@@ -66,9 +79,9 @@ public class BlogController {
         blog.setType(typeService.getType(blog.getType().getId()));
         blog.setTags(tagService.listTag(blog.getTagIds()));
         Blog b;
-        if(blog.getId() == null){
+        if (blog.getId() == null) {
             b = blogService.saveBlog(blog);
-        }else{
+        } else {
             b = blogService.updateBlog(blog.getId(), blog);
         }
         if (b == null) {
