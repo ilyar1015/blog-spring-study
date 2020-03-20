@@ -5,3 +5,7 @@ spring:
     active: dev
   jackson:
     time-zone: GMT+8
+  messages:
+    basename: i18n/messages
+
+comment.avatar: /images/elliot.jpg
